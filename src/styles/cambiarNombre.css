@@ -5,21 +5,34 @@
   padding: 0;
 }
 
+.general-container{
+  width: 100vw;
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(
+      420px,1fr
+    )
+  );
+  gap: 1rem;
+
+}
+
 .character-container {
   font-family: "Fredoka One", cursive;
   background: #737373;
 
   display: flex;
   align-items: flex-start;
-  border-radius: 10px;
+  border-radius: 15px;
 
   /*esto modificarlo despues*/
-  width: 420px;
+  width: 400px;
 }
 
 .character-img {
-  width: 40%;
-  border-radius: 10px 0 0 10px;
+  width: 45%;
+  border-radius: 15px 0 0 15px;
 }
 
 .data-container {
