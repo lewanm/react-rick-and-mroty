@@ -1,12 +1,13 @@
 import React, { ReactElement } from 'react'
 import type Character from "../../../types/character";
+import './styles.css'
 
 type CharacterCardProps = {
   character: Character
 }
 
 export default function CharacterCard(props: CharacterCardProps): ReactElement {
-
+ 
   const { character } = props
 
   return (
@@ -19,7 +20,7 @@ export default function CharacterCard(props: CharacterCardProps): ReactElement {
       <div className="data-container">
         <p className="character-name">{character.name}</p>
         <p className="medium-size">Especie: {character.species}</p>
-        <p>Episodios: {character.episodes}</p>
+        <p>Episodios: {character.episode.length}</p>
         <p>
           {character.status === "Alive" ? (
             <span className="alive">💗 Vivo</span>

@@ -4,7 +4,7 @@ type Character = {
   name: string;
   status: string;
   species: string;
-  episodes: number;
+  episode: string[];
 };
 
 export default Character;

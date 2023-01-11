@@ -1,57 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap");
+@import url("../../css-general.css");
 
 * {
   margin: 0;
   padding: 0;
 }
 
-.general-container{
+.general-container {
   width: 100vw;
   display: grid;
-  grid-template-columns: repeat(
-    auto-fit,
-    minmax(
-      420px,1fr
-    )
-  );
+  grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
   gap: 1rem;
-
-}
-
-.character-container {
-  font-family: "Fredoka One", cursive;
-  background: #737373;
-
-  display: flex;
-  align-items: flex-start;
-  border-radius: 15px;
-
-  /*esto modificarlo despues*/
-  width: 400px;
-}
-
-.character-img {
-  width: 45%;
-  border-radius: 15px 0 0 15px;
-}
-
-.data-container {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 1rem;
-  margin: auto 1rem;
-  color: white;
-  text-shadow: 1px 0 #000, -1px 0 #000, 0 1px #000, 0 -1px #000, 1px 1px #000,
-    -1px -1px #000, 1px -1px #000, -1px 1px #000;
-}
-
-.character-name {
-  font-size: 2rem;
-  color: #40b5cb;
-  text-shadow: 0.5px 0 #000, -0.5px 0 #000, 0 0.5px #000, 0 -0.5px #000,
-    0.5px 0.5px #000, -0.5px -0.5px #000, 0.5px -0.5px #000, -0.5px 0.5px #000,
-    2px 0 #c0df40, -2px 0 #c0df40, 0 2px #c0df40, 0 -2px #c0df40,
-    1px 1px #c0df40, -1px -1px #c0df40, 1px -1px #c0df40, -1px 1px #c0df40;
 }
