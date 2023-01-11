@@ -1,7 +1,8 @@
-import Characters from './views/Characters'
-import './styles/cambiarNombre.css'
+import React,{ReactElement} from 'react'
 
-function App() {
+import Characters from './views/character'
+
+function App() : ReactElement{
 
   return (
     <div className="App">
