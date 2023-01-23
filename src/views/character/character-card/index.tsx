@@ -21,13 +21,15 @@ export default function CharacterCard(props: CharacterCardProps): ReactElement {
         <p className="character-name">{character.name}</p>
         <p className="medium-size">Especie: {character.species}</p>
         <p>Episodios: {character.episode.length}</p>
-        <p>
-          {character.status === "Alive" ? (
-            <span className="alive">💗 Vivo</span>
-          ) : (
-            <span className="dead">💀 Muerto</span>
-          )}
-        </p>
+        <div className="character-status-container">
+          <p className="character-status">
+            {character.status === "Alive" ? (
+              <span className="alive">💗</span>
+            ) : (
+              <span className="dead">💀</span>
+            )}
+          </p>
+        </div>
       </div>
     </div>
   );

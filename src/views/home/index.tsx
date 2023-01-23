@@ -1,9 +1,14 @@
 import React,{ReactElement} from 'react';
 
-export default function Home(){
+type Props = {
+    parentFunction: (event: React.MouseEvent<HTMLButtonElement>) => void
+ }
+
+export default function Home(props: Props ){
+    const {parentFunction} = props
     return(
         <div>
-            <button>Ir a los personajes</button>
+            <button onClick={parentFunction}>Ir a los personajes</button>
         </div>
     )
 }

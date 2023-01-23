@@ -9,6 +9,8 @@
 .character-container {
   font-family: var(--main-font);
   background: #737373;
+  position: relative;
+  display: inline-block;
 
   display: flex;
   align-items: flex-start;
@@ -19,18 +21,33 @@
   height: 200px;
 }
 
+.character-status-container {
+  background-color: white;
+  border: 2px solid black;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  border-radius: 50%;
+}
+
+.character-status {
+  font-size: 1.5rem;
+}
+
 .character-img {
   height: 100%;
   border-radius: 15px 0 0 15px;
 }
 
 .data-container {
-  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
   align-items: flex-start;
   gap: 0.5rem;
   margin: auto 1rem;
+  padding-top: 1rem;
   color: white;
   text-shadow: 1px 0 #000, -1px 0 #000, 0 1px #000, 0 -1px #000, 1px 1px #000,
     -1px -1px #000, 1px -1px #000, -1px 1px #000;

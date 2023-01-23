@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Fredoka+One&family=Margarine&display=swap");
 :root {
   background-color: #242424;
 
@@ -10,5 +10,5 @@
     -1px 1px #c0df40;
 
   --main-color: #40b5cb;
-  --main-font: "Fredoka One", cursive;
+  --main-font: "Fredoka One", cursuve, "Margarine", cursive;
 }

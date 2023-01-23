@@ -6,11 +6,14 @@ import promiseHelper from '../../helpers/promise'
 import CharacterCard from "./character-card";
 import Character from '../../types/character';
 
-
+type Props = {
+  parentFunction: (event: React.MouseEvent<HTMLButtonElement>) => void
+}
 
 const api = "https://rickandmortyapi.com/api/character"
 
-export default function Characters(): ReactElement {
+export default function Characters(props: Props): ReactElement {
+  const {parentFunction} = props
   const [characters, setCharacters] = useState<Character[]>([])
   const [charFilter, setCharFilter] = useState<string>("")
 
@@ -24,25 +27,32 @@ export default function Characters(): ReactElement {
     return characters.data
   }
 
+  const updateCharacters = () =>{
+    getCharacters()
+      .then(chars => setCharacters(filterList(chars.results, charFilter)))
+      .catch(err => console.error("Error al obtener personajes", err))
+  }
+
   const onCharacterFilter = (event: ChangeEvent<HTMLInputElement>) => {
     setCharFilter(event.target.value)
   }
 
   useEffect(() => {
-    getCharacters()
-      .then(chars => setCharacters(filterList(chars.results, charFilter)))
-      .catch(err => console.error("Error al obtener personajes", err))
+    updateCharacters()
   }, [charFilter])
 
   return (
     <div className="general-container">
       <h1>Personajes</h1>
+      <span onClick={parentFunction}>Volver al menu anterior</span>
       <input type="text" name="filter" value={charFilter} id="" onChange={onCharacterFilter} />
       {
         characters.map(character => (
           <CharacterCard character={character} key={character.id} />
         ))
       }
+      <span onClick={parentFunction}>Volver al menu anterior</span>
     </div>
   );
 }
+
