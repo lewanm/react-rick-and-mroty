@@ -51,3 +51,8 @@
   font-size: 2rem;
   color: var(--main-color);
 }
+
+.character-name:hover {
+  color: var(--main-decorator-color);
+  cursor: pointer;
+}

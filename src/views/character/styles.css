@@ -1,12 +1,24 @@
 @import url("https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap");
 
 .general-container {
-  width: 100vw;
+  width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
   gap: 1rem;
 }
 
-.subtitle {
-  font-size: 2rem;
+.return {
+  text-align: center;
+}
+
+.filter-container {
+  margin: 1rem 0;
+}
+
+.filter-container span {
+  font-size: 1.5rem;
+}
+
+.filter-input {
+  line-height: 2rem;
 }

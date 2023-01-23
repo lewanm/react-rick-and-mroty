@@ -4,8 +4,5 @@ export default function filterList(characters: Character[], valueToFilter: strin
     const filteredList = characters.filter((character: Character) =>
          character.name.toLowerCase().includes(valueToFilter.toLowerCase()))
 
-/*     chars.results.filter((character: Character) =>
-         character.name.toLowerCase().includes(charFilter.toLowerCase())) */
-
     return filteredList
 }

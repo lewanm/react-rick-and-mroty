@@ -1,4 +1,10 @@
-type Character = {
+export type Info = {
+  pages: number,
+  next: string,
+  prev: string
+};
+
+type Results = {
   id: number;
   image: string;
   name: string;
@@ -7,4 +13,11 @@ type Character = {
   episode: string[];
 };
 
-export default Character;
+export type Character = {
+  id: number;
+  image: string;
+  name: string;
+  status: string;
+  species: string;
+  episode: string[];
+};
