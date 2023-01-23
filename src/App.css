@@ -1,11 +1,10 @@
-@import url("./css-general.css");
-
 * {
   margin: 0;
   padding: 0;
 }
 
 .title {
+  margin: 1rem 0;
   font-size: 3rem;
   font-family: var(--main-font);
   color: var(--main-color);

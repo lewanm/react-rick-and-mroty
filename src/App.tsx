@@ -8,6 +8,8 @@ function App() : ReactElement{
 
   const [loadImages, setLoadImages] = useState<boolean>(false)  
 
+
+  //CAMBIAR NOMBRE A ESTA FUNCION
   const parentFunction = () => {
       setLoadImages(!loadImages)
   }

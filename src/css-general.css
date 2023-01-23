@@ -1,8 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Fredoka+One&family=Margarine&display=swap");
-:root {
-  background-color: #242424;
 
+:root {
   --rick-and-morty-effect: 0.5px 0 #000, -0.5px 0 #000, 0 0.5px #000,
     0 -0.5px #000, 0.5px 0.5px #000, -0.5px -0.5px #000, 0.5px -0.5px #000,
     -0.5px 0.5px #000, 2px 0 #c0df40, -2px 0 #c0df40, 0 2px #c0df40,
@@ -10,5 +9,6 @@
     -1px 1px #c0df40;
 
   --main-color: #40b5cb;
+  --main-decorator-color: #c0df40;
   --main-font: "Fredoka One", cursuve, "Margarine", cursive;
 }
