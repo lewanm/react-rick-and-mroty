@@ -43,7 +43,7 @@ export default function Characters(props: Props): ReactElement {
 
   return (
     <div className="general-container">
-      <h1>Personajes</h1>
+      <p className="subtitle">Personajes</p>
       <span onClick={parentFunction}>Volver al menu anterior</span>
       <input type="text" name="filter" value={charFilter} id="" onChange={onCharacterFilter} />
       {
