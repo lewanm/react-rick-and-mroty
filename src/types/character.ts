@@ -1,7 +1,8 @@
 export type Info = {
   pages: number,
   next: string,
-  prev: string
+  prev: string,
+  count: number
 };
 
 type Results = {
