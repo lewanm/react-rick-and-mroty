@@ -19,8 +19,18 @@ export default function Pagination1(props: PaginationProps) {
   }
 
   return (
-    <Stack spacing={2}>
-      <Pagination count={10} shape="rounded" />
-    </Stack>
+    <nav>
+      <div className="pagination">
+        <button onClick={prevPage}> &#10094; </button>
+        {pageNumbers.map((number) => (
+          <span key={number} className="page-item">
+            <a onClick={() => paginate(number)} href="#" className="page-link">
+              {number}
+            </a>
+          </span>
+        ))}
+        <button onClick={nextPage}> &#10095; </button>
+      </div>
+    </nav>
   );
 }
