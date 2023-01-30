@@ -1,0 +1,14 @@
+.filter-container {
+  display: flex;
+}
+
+.gender,
+.status,
+.species {
+  border: 1px solid black;
+  border-radius: 10px;
+  width: fit-content;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+}

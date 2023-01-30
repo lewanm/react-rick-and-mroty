@@ -17,10 +17,6 @@ export default function Pagination(props: PaginationProps) {
     pageNumbers.push(i);
   }
 
-  const prueba = (n: number) => {
-    console.log(n);
-  };
-
   return (
     <nav>
       <div className="pagination">

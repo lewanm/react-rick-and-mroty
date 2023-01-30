@@ -6,9 +6,10 @@
 import React, { ReactElement, useState, useEffect, ChangeEvent } from "react";
 import axios from "axios";
 import "./styles.css";
-import filterList from "../../helpers/filter";
+import getPageNumber from "../../helpers/getPageNumber";
 import promiseHelper from "../../helpers/promise";
 import CharacterCard from "./character-card";
+import Filters from "./filters";
 import Pagination from "./pagination";
 import { Info, Character } from "../../types/character";
 
@@ -30,9 +31,7 @@ export default function Characters(props: Props): ReactElement {
   });
   const [characters, setCharacters] = useState<Character[]>([]);
   const [charFilter, setCharFilter] = useState<string>("");
-  /* const [currentPageIndex, setCurrentIndex] = useState<number>(1); */
   const [currentPage, setCurrentPage] = useState<number>(FIRST_PAGE);
-  //const [pageNumber,setageNumber]
   const [status, setStatus] = useState<string>("");
   const [gender, setGender] = useState<string>("");
   const [species, setSpecies] = useState<string>("");
@@ -66,35 +65,23 @@ export default function Characters(props: Props): ReactElement {
     setCurrentPage(1);
   };
 
-  const getPageIndex = (url: string): number => {
-    const regex = /(\d+)/g;
-    const index = url.match(regex);
-    if (index !== null) {
-      return parseInt(index[0]);
-    }
-    //TODO VER COMO CAMBIAR ESTO :(
-    return 1;
-  };
-
   const paginate = (page: number) => {
     setCurrentPage(page);
   };
 
   const nextPage = () => {
     if (info.next !== null) {
-      const index = getPageIndex(info.next);
+      const index = getPageNumber(info.next);
       setCurrentPage(index);
     }
   };
 
   const prevPage = () => {
     if (info.prev !== null) {
-      const index = getPageIndex(info.prev);
+      const index = getPageNumber(info.prev);
       setCurrentPage(index);
     }
   };
-
-  const updatePageUrl = () => {};
 
   const indexOfLastPost = currentPage * postPerPage;
   const indexOfFirstPost = indexOfLastPost - postPerPage;
@@ -102,21 +89,15 @@ export default function Characters(props: Props): ReactElement {
 
   useEffect(() => {
     updateCharacters();
-    //updatePageIndex();
-  }, [charFilter, currentPage]);
+  }, [charFilter, currentPage, status, gender, species]);
 
   return (
     <>
-      <h1>MAS PRUEBAS: </h1>
-      <h1>{indexOfLastPost}</h1>
-      <h1>{indexOfFirstPost}</h1>
-
-      <h1>Pages: {info.pages}</h1>
       <span className="return" onClick={parentFunction}>
         Volver al menu anterior
       </span>
-      <div className="filter-container">
-        <span>Buscar por personaje </span>
+      <div className="search-container">
+        <span>Buscar por nombre </span>
         <input
           className="filter-input"
           type="text"
@@ -126,17 +107,22 @@ export default function Characters(props: Props): ReactElement {
           onChange={onCharacterFilter}
         />
 
-        <Pagination
-          totalPost={info.count}
-          postPerPage={postPerPage}
-          nextPage={nextPage}
-          prevPage={prevPage}
-          paginate={paginate}
+        <Filters
+          setStatus={setStatus}
+          setSpecies={setSpecies}
+          setGender={setGender}
+          gender={gender}
+          status={status}
+          species={species}
         />
-
-        <h2>Pagina actual: </h2>
-        <h2>{currentPage}</h2>
       </div>
+      <Pagination
+        totalPost={info.count}
+        postPerPage={postPerPage}
+        nextPage={nextPage}
+        prevPage={prevPage}
+        paginate={paginate}
+      />
       <div className="general-container">
         {characters.map((character) => (
           <CharacterCard character={character} key={character.id} />
