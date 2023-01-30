@@ -1,4 +1,5 @@
 import React from "react";
+import { Pagination, Stack } from "@mui/material";
 import "./styles.css";
 
 type PaginationProps = {
@@ -9,7 +10,7 @@ type PaginationProps = {
   paginate: (page: number) => void;
 };
 
-export default function Pagination(props: PaginationProps) {
+export default function Pagination1(props: PaginationProps) {
   const { totalPost, postPerPage, prevPage, nextPage, paginate } = props;
   const pageNumbers: number[] = [];
 
@@ -18,18 +19,8 @@ export default function Pagination(props: PaginationProps) {
   }
 
   return (
-    <nav>
-      <div className="pagination">
-        <button onClick={prevPage}> &#10094; </button>
-        {pageNumbers.map((number) => (
-          <span key={number} className="page-item">
-            <a onClick={() => paginate(number)} href="#" className="page-link">
-              {number}
-            </a>
-          </span>
-        ))}
-        <button onClick={nextPage}> &#10095; </button>
-      </div>
-    </nav>
+    <Stack spacing={2}>
+      <Pagination count={10} shape="rounded" />
+    </Stack>
   );
 }
