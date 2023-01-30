@@ -1,19 +1,13 @@
-//TODO MODIFICAR CURRENT PAGE; PARA QUE SEA UN NUMERO Y NO UNA PAGINA. --- LITO
-//TODO MODIFICAR FUNCION PREV/NEXT PAGE PARA QUE UPDATE EL NUMERO Y NO TODA LA PAGINA.
-//TODO CREAR FUNCION UPDATE PAGE (URL) PARA SIMPLEMENTE MODIFICAR LA PAGINA (el numero)
-//MANDAR POR PROPS Y MODIFICAR COMO LO MANDA.
-
 import React, { ReactElement, useState, useEffect, ChangeEvent } from "react";
 import axios from "axios";
 import "./styles.css";
-import getPageNumber from "../../helpers/getPageNumber";
 import promiseHelper from "../../helpers/promise";
 import CharacterCard from "./character-card";
 import Filters from "./filters";
-//import Pagination from "./pagination";
 import { Pagination, Stack } from "@mui/material";
 import { Info, Character } from "../../types/character";
 
+//TODO CAMBIAR NOMRE A ESTA FUNCION QUE TRAIGO DE APP.TSX
 type Props = {
   parentFunction: (event: React.MouseEvent<HTMLButtonElement>) => void;
 };
@@ -37,7 +31,6 @@ export default function Characters(props: Props): ReactElement {
   const [gender, setGender] = useState<string>("");
   const [species, setSpecies] = useState<string>("");
 
-  //let api = `https://rickandmortyapi.com/api/character/?page=${page}`
   let api = `https://rickandmortyapi.com/api/character/?page=${currentPage}&name=${charFilter}&status=${status}&gender=${gender}&species=${species}`;
 
   const getCharacters = async () => {
@@ -52,9 +45,6 @@ export default function Characters(props: Props): ReactElement {
   };
 
   const updateCharacters = () => {
-    /*     getCharacters()
-      .then(chars => setCharacters(filterList(chars.results, charFilter)))
-      .catch(err => console.error("Error al obtener personajes", err)) */
     getCharacters().then((characters) => {
       setCharacters(characters.results);
       setInfo(characters.info);
@@ -66,31 +56,12 @@ export default function Characters(props: Props): ReactElement {
     setCurrentPage(1);
   };
 
-  const handlePageChange = (event: any, page: number) => {
+  const handlePageChange = (
+    event: React.ChangeEvent<unknown>,
+    page: number
+  ) => {
     setCurrentPage(page);
   };
-
-  /*   const paginate = (page: number) => {
-    setCurrentPage(page);
-  };
-
-  const nextPage = () => {
-    if (info.next !== null) {
-      const index = getPageNumber(info.next);
-      setCurrentPage(index);
-    }
-  };
-
-  const prevPage = () => {
-    if (info.prev !== null) {
-      const index = getPageNumber(info.prev);
-      setCurrentPage(index);
-    }
-  }; */
-
-  const indexOfLastPost = currentPage * postPerPage;
-  const indexOfFirstPost = indexOfLastPost - postPerPage;
-  const currentPosts = characters.slice(indexOfFirstPost, indexOfLastPost);
 
   useEffect(() => {
     updateCharacters();

@@ -14,6 +14,16 @@ type Results = {
   episode: string[];
 };
 
+type Location ={
+  name: string
+  url: string
+}
+
+type Origin ={
+  name: string
+  url: string
+}
+
 export type Character = {
   id: number;
   image: string;
@@ -21,4 +31,8 @@ export type Character = {
   status: string;
   species: string;
   episode: string[];
+  location: Location;
+  origin: Origin
+  gender: string
+  type: string
 };
