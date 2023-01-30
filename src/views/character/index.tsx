@@ -10,7 +10,8 @@ import getPageNumber from "../../helpers/getPageNumber";
 import promiseHelper from "../../helpers/promise";
 import CharacterCard from "./character-card";
 import Filters from "./filters";
-import Pagination from "./pagination";
+//import Pagination from "./pagination";
+import { Pagination, Stack } from "@mui/material";
 import { Info, Character } from "../../types/character";
 
 type Props = {
@@ -65,7 +66,11 @@ export default function Characters(props: Props): ReactElement {
     setCurrentPage(1);
   };
 
-  const paginate = (page: number) => {
+  const handlePageChange = (event: any, page: number) => {
+    setCurrentPage(page);
+  };
+
+  /*   const paginate = (page: number) => {
     setCurrentPage(page);
   };
 
@@ -81,7 +86,7 @@ export default function Characters(props: Props): ReactElement {
       const index = getPageNumber(info.prev);
       setCurrentPage(index);
     }
-  };
+  }; */
 
   const indexOfLastPost = currentPage * postPerPage;
   const indexOfFirstPost = indexOfLastPost - postPerPage;
@@ -116,13 +121,18 @@ export default function Characters(props: Props): ReactElement {
           species={species}
         />
       </div>
-      <Pagination
-        totalPost={info.count}
-        postPerPage={postPerPage}
-        nextPage={nextPage}
-        prevPage={prevPage}
-        paginate={paginate}
-      />
+
+      <div className="pagination-container">
+        <Stack spacing={2}>
+          <Pagination
+            count={info.pages}
+            shape="rounded"
+            variant="outlined"
+            onChange={handlePageChange}
+          />
+        </Stack>
+      </div>
+
       <div className="general-container">
         {characters.map((character) => (
           <CharacterCard character={character} key={character.id} />
