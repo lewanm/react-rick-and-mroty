@@ -10,3 +10,5 @@ Cosas que se implementan:
 -React Hooks (useState, useEffect)
 -ReactMUI (ThemeProvider, Button, Pagination, TextField, Select, Modal, Box, Table, etc
 
+Preview con fallos de CSS
+https://cool-fudge-7e244d.netlify.app/
