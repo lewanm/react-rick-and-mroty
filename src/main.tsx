@@ -1,6 +1,5 @@
 import React, { ReactElement, useState } from "react";
 import ReactDOM from "react-dom/client";
-import "./app.css";
 
 import Characters from "./views/character";
 import Home from "./views/home";
