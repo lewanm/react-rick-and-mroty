@@ -4,7 +4,14 @@ import "./styles.css";
 import promiseHelper from "../../helpers/promise";
 import CharacterCard from "./character-card";
 import Filters from "./filters";
-import { Pagination, Stack } from "@mui/material";
+import { theme } from "../../themes/MUI";
+import {
+  Button,
+  Pagination,
+  Stack,
+  TextField,
+  ThemeProvider,
+} from "@mui/material";
 import { Info, Character } from "../../types/character";
 
 //TODO CAMBIAR NOMRE A ESTA FUNCION QUE TRAIGO DE APP.TSX
@@ -13,7 +20,6 @@ type Props = {
 };
 
 const FIRST_PAGE = 1;
-const postPerPage = 20;
 
 export default function Characters(props: Props): ReactElement {
   const { parentFunction } = props;
@@ -44,6 +50,14 @@ export default function Characters(props: Props): ReactElement {
     return characters.data;
   };
 
+  const resetFilters = () => {
+    setCharFilter("");
+    setCurrentPage(FIRST_PAGE);
+    setStatus("");
+    setGender("");
+    setSpecies("");
+  };
+
   const updateCharacters = () => {
     getCharacters().then((characters) => {
       setCharacters(characters.results);
@@ -68,48 +82,52 @@ export default function Characters(props: Props): ReactElement {
   }, [charFilter, currentPage, status, gender, species]);
 
   return (
-    <>
-      <span className="return" onClick={parentFunction}>
-        Volver al menu anterior
-      </span>
-      <div className="search-container">
-        <span>Buscar por nombre </span>
-        <input
-          className="filter-input"
-          type="text"
-          name="filter"
-          value={charFilter}
-          id=""
-          onChange={onCharacterFilter}
-        />
-
-        <Filters
-          setStatus={setStatus}
-          setSpecies={setSpecies}
-          setGender={setGender}
-          gender={gender}
-          status={status}
-          species={species}
-        />
-      </div>
-
-      <div className="pagination-container">
-        <Stack spacing={2}>
-          <Pagination
-            count={info.pages}
-            shape="rounded"
-            variant="outlined"
-            onChange={handlePageChange}
+    <div className="general-container">
+      <div className="prueba">
+        <div className="return-container">
+          <span className="return" onClick={parentFunction}>
+            Volver al menu anterior
+          </span>
+        </div>
+        <ThemeProvider theme={theme}>
+          <div className="search-clear-container">
+            <TextField
+              id="character-filter"
+              label="Buscar por nombre"
+              variant="outlined"
+              value={charFilter}
+              onChange={onCharacterFilter}
+            />
+            <Button onClick={resetFilters} variant="contained">
+              Clear
+            </Button>
+          </div>
+          <Filters
+            setStatus={setStatus}
+            setSpecies={setSpecies}
+            setGender={setGender}
+            gender={gender}
+            status={status}
+            species={species}
           />
-        </Stack>
-      </div>
+          <div className="pagination-container">
+            <Pagination
+              sx={{ width: 1 / 1 }}
+              count={info.pages}
+              shape="rounded"
+              variant="outlined"
+              onChange={handlePageChange}
+            />
+          </div>
+          <div className="cards-container">
+            {characters.map((character) => (
+              <CharacterCard character={character} key={character.id} />
+            ))}
+          </div>
+        </ThemeProvider>
 
-      <div className="general-container">
-        {characters.map((character) => (
-          <CharacterCard character={character} key={character.id} />
-        ))}
+        <span onClick={parentFunction}>Volver al menu anterior</span>
       </div>
-      <span onClick={parentFunction}>Volver al menu anterior</span>
-    </>
+    </div>
   );
 }

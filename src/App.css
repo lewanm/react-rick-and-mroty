@@ -6,12 +6,12 @@
 .title {
   margin: 1rem 0;
   font-size: 3rem;
-  font-family: var(--main-font);
+  font-family: var(--title-font);
   color: var(--main-color);
   text-shadow: var(--rick-and-morty-effect);
   text-align: center;
 }
 
 body {
-  background-color: lightgray;
+  background-color: #7d7d7d;
 }

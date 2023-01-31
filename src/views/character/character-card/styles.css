@@ -9,10 +9,8 @@
   display: flex;
   align-items: flex-start;
   border-radius: 15px;
-
+  max-width: 400px;
   /*esto modificarlo despues*/
-  width: 400px;
-  height: 200px;
 }
 
 .character-status-container {
@@ -29,7 +27,7 @@
 }
 
 .character-img {
-  height: 100%;
+  width: 35%;
   border-radius: 15px 0 0 15px;
 }
 
@@ -41,15 +39,21 @@
   align-items: flex-start;
   gap: 0.5rem;
   margin: auto 1rem;
-  padding-top: 1rem;
   color: white;
   text-shadow: 1px 0 #000, -1px 0 #000, 0 1px #000, 0 -1px #000, 1px 1px #000,
     -1px -1px #000, 1px -1px #000, -1px 1px #000;
 }
 
 .character-name {
-  font-size: 2rem;
   color: var(--main-color);
+}
+
+.title-big {
+  font-size: 2rem;
+}
+
+.title-normal {
+  font-size: 1rem;
 }
 
 .character-name:hover {

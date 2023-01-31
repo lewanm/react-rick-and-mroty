@@ -1,5 +1,11 @@
 import React, { ReactElement } from "react";
-import { InputLabel, MenuItem, FormControl, Select } from "@mui/material";
+import {
+  InputLabel,
+  MenuItem,
+  FormControl,
+  Select,
+  MenuList,
+} from "@mui/material";
 import { SelectChangeEvent } from "@mui/material/Select";
 import "./styles.css";
 
@@ -15,6 +21,10 @@ type FilterProps = {
 export default function Filters(props: FilterProps): ReactElement {
   const { status, setStatus, gender, setGender, species, setSpecies } = props;
 
+  const style = {
+    maxWidth: 150,
+    width: 1 / 3,
+  };
   const genderList = ["Male", "Female", "Genderless", "Unknown"];
   const statusList = ["Alive", "Dead", "Unknown"];
   const speciesList = [
@@ -44,14 +54,15 @@ export default function Filters(props: FilterProps): ReactElement {
   };
 
   return (
-    <div>
-      <FormControl variant="filled" sx={{ m: 1, minWidth: 120 }}>
+    <div className="filter-container">
+      <FormControl variant="filled" sx={{ mr: 1, width: 1 / 3 }}>
         <InputLabel id="gender-label">Gender</InputLabel>
         <Select
           labelId="gender-label"
           id="gender"
           value={gender}
           onChange={handleGenderChange}
+          variant="outlined"
         >
           <MenuItem value="">
             <em>None</em>
@@ -64,13 +75,14 @@ export default function Filters(props: FilterProps): ReactElement {
         </Select>
       </FormControl>
 
-      <FormControl variant="filled" sx={{ m: 1, minWidth: 120 }}>
+      <FormControl variant="filled" sx={{ mx: 1, width: 1 / 3 }}>
         <InputLabel id="status-label">Status</InputLabel>
         <Select
           labelId="status-label"
           id="status"
           value={status}
           onChange={handleStatusChange}
+          variant="outlined"
         >
           <MenuItem value="">
             <em>None</em>
@@ -83,13 +95,14 @@ export default function Filters(props: FilterProps): ReactElement {
         </Select>
       </FormControl>
 
-      <FormControl variant="filled" sx={{ m: 1, minWidth: 120 }}>
+      <FormControl variant="filled" sx={{ ml: 1, width: 1 / 3 }}>
         <InputLabel id="species-label">Status</InputLabel>
         <Select
           labelId="species-label"
           id="species"
           value={species}
           onChange={handleSpeciesChange}
+          variant="outlined"
         >
           <MenuItem value="">
             <em>None</em>

@@ -50,7 +50,7 @@ export default function CharacterCard(props: CharacterCardProps): ReactElement {
           alt={character.name}
         />
         <div className="data-container">
-          <p onClick={handleModal} className="character-name">
+          <p onClick={handleModal} className="character-name title-big">
             {character.name}
           </p>
           <p className="medium-size">Especie: {character.species}</p>
@@ -59,8 +59,10 @@ export default function CharacterCard(props: CharacterCardProps): ReactElement {
             <p className="character-status">
               {character.status === "Alive" ? (
                 <span className="alive">💗</span>
-              ) : (
+              ) : character.status === "Dead" ? (
                 <span className="dead">💀</span>
+              ) : (
+                <span className="dead">¿?</span>
               )}
             </p>
           </div>
