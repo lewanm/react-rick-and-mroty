@@ -1,5 +1,5 @@
 import React, { ReactElement, useEffect, useState } from "react";
-import "./app.css";
+import "./App.css";
 
 import Characters from "./views/character";
 import Home from "./views/home";
