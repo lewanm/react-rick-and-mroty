@@ -30,42 +30,38 @@ export default function CharacterCard(props: CharacterCardProps): ReactElement {
 
   return (
     <>
-      <div>
-        <Modal
-          open={openModal}
-          onClose={handleModal}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-        >
-          <Box sx={style}>
-            <CharacterModal character={character} handleModal={handleModal} />
-          </Box>
-        </Modal>
-      </div>
+      <Modal
+        open={openModal}
+        onClose={handleModal}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <CharacterModal character={character} handleModal={handleModal} />
+        </Box>
+      </Modal>
 
       <div className="character-container">
-        <img
-          className="character-img"
-          src={character.image}
-          alt={character.name}
-        />
+        <div className="image-container">
+          <div className="character-status-container">
+            <img
+              className={`character-status ${character.status.toLowerCase()}`}
+              src={`/boxicons-${character.status.toLowerCase()}.svg`}
+              alt=""
+            />
+          </div>
+          <img
+            className="character-image"
+            src={character.image}
+            alt={character.name}
+          />
+        </div>
         <div className="data-container">
           <p onClick={handleModal} className="character-name title-big">
             {character.name}
           </p>
           <p className="medium-size">Especie: {character.species}</p>
           <p>Episodios: {character.episode.length}</p>
-          <div className="character-status-container">
-            <p className="character-status">
-              {character.status === "Alive" ? (
-                <span className="alive">💗</span>
-              ) : character.status === "Dead" ? (
-                <span className="dead">💀</span>
-              ) : (
-                <span className="dead">¿?</span>
-              )}
-            </p>
-          </div>
         </div>
       </div>
     </>

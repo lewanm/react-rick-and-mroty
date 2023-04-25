@@ -83,13 +83,13 @@ export default function Characters(props: Props): ReactElement {
 
   return (
     <div className="general-container">
-      <div className="prueba">
-        <div className="return-container">
-          <span className="return" onClick={parentFunction}>
-            Volver al menu anterior
-          </span>
-        </div>
-        <ThemeProvider theme={theme}>
+      <div className="return-container">
+        <span className="return" onClick={parentFunction}>
+          Volver al menu anterior
+        </span>
+      </div>
+      <ThemeProvider theme={theme}>
+        <div className="filters-container">
           <div className="search-clear-container">
             <TextField
               id="character-filter"
@@ -97,8 +97,13 @@ export default function Characters(props: Props): ReactElement {
               variant="outlined"
               value={charFilter}
               onChange={onCharacterFilter}
+              sx={{ marginRight: "0.25rem" }}
             />
-            <Button onClick={resetFilters} variant="contained">
+            <Button
+              sx={{ marginLeft: "0.5rem" }}
+              onClick={resetFilters}
+              variant="contained"
+            >
               Clear
             </Button>
           </div>
@@ -109,7 +114,7 @@ export default function Characters(props: Props): ReactElement {
             gender={gender}
             status={status}
             species={species}
-          />
+          />{" "}
           <div className="pagination-container">
             <Pagination
               sx={{ width: 1 / 1 }}
@@ -119,15 +124,16 @@ export default function Characters(props: Props): ReactElement {
               onChange={handlePageChange}
             />
           </div>
-          <div className="cards-container">
-            {characters.map((character) => (
-              <CharacterCard character={character} key={character.id} />
-            ))}
-          </div>
-        </ThemeProvider>
+        </div>
 
-        <span onClick={parentFunction}>Volver al menu anterior</span>
-      </div>
+        <div className="cards-container">
+          {characters.map((character) => (
+            <CharacterCard character={character} key={character.id} />
+          ))}
+        </div>
+      </ThemeProvider>
+
+      <span onClick={parentFunction}>Volver al menu anterior</span>
     </div>
   );
 }

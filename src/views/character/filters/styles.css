@@ -1,14 +1,8 @@
 .filter-container {
-  display: flex;
-  justify-content: flex-start;
-}
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
 
-.gender,
-.status,
-.species {
-  border-radius: 10px;
-  width: fit-content;
-  padding: 0.5rem;
-  display: flex;
-  flex-direction: column;
+  width: 90%;
+  margin: 0 auto;
+  max-width: 1400px;
 }

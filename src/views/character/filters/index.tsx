@@ -55,7 +55,7 @@ export default function Filters(props: FilterProps): ReactElement {
 
   return (
     <div className="filter-container">
-      <FormControl variant="filled" sx={{ mr: 1, width: 1 / 3 }}>
+      <FormControl sx={{ marginRight: "0.75rem" }} variant="filled">
         <InputLabel id="gender-label">Gender</InputLabel>
         <Select
           labelId="gender-label"
@@ -75,7 +75,10 @@ export default function Filters(props: FilterProps): ReactElement {
         </Select>
       </FormControl>
 
-      <FormControl variant="filled" sx={{ mx: 1, width: 1 / 3 }}>
+      <FormControl
+        sx={{ marginLeft: "0.25rem", marginRight: "0.25rem" }}
+        variant="filled"
+      >
         <InputLabel id="status-label">Status</InputLabel>
         <Select
           labelId="status-label"
@@ -95,8 +98,8 @@ export default function Filters(props: FilterProps): ReactElement {
         </Select>
       </FormControl>
 
-      <FormControl variant="filled" sx={{ ml: 1, width: 1 / 3 }}>
-        <InputLabel id="species-label">Status</InputLabel>
+      <FormControl sx={{ marginLeft: "0.5rem" }} variant="filled">
+        <InputLabel id="species-label">Specie</InputLabel>
         <Select
           labelId="species-label"
           id="species"
