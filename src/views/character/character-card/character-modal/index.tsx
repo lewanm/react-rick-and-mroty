@@ -1,8 +1,9 @@
 import React, { ReactElement, useState } from "react";
 import axios from "axios";
 import type { Character } from "../../../../types/character";
-import type Episode from "../../../../types/episode";
+import type { Episode } from "../../../../types/episode";
 import promiseHelper from "../../../../helpers/promise";
+import getPageNumber from "../../../../helpers/getPageNumber";
 import {
   Table,
   TableBody,
@@ -13,73 +14,101 @@ import {
   Button,
 } from "@mui/material";
 
+import "./styles.css";
+
 type CharacterModalProps = {
   character: Character;
   handleModal: any;
+  episodes: Episode[];
 };
 //TODO AL ABRIR VENTANA MODAL HACER OTRO FETCH PARA OBTENER LOS EPISODIOS
 export default function CharacterModal(props: CharacterModalProps) {
-  const { character, handleModal } = props;
-  const [episodes, setEpisodes] = useState<Episode[]>([]);
+  const { character, handleModal, episodes } = props;
 
-  const getEpisodes = async () => {
-    const [episode, error] = await promiseHelper(
-      axios.get("https://rickandmortyapi.com/api/episode/1")
-    );
+  const episodesIDs = character.episode.map((episode) =>
+    getPageNumber(episode)
+  );
 
-    if (error) {
-      console.log(error);
-      throw new Error(error);
-    }
+  //VER OTRA FORMA DE HACERLO BUSCANDO POR ID // TODO
+  const filteredEpisodes = episodesIDs.map((episodeID) =>
+    episodes.find((episode) => episodeID === episode.id)
+  );
 
-    setEpisodes(episode);
-  };
+  function arrayToTable(episodes: any[]) {
+    const episodeRows = episodes.map((_episode, index) => {
+      const episodeText =
+        index === 0 ? <th rowSpan={episodes.length + 1}>Episodes</th> : null;
+      return (
+        <tr className="episodes" key={index}>
+          {episodeText}
+          <td>{_episode}</td>
+        </tr>
+      );
+    });
 
-  console.log(character);
+    return episodeRows;
+  }
+
+  //const episodesTable = arrayToTable(myArray);
+  console.log({ episodes });
+
   return (
-    <div>
-      <p>{character.name}</p>
-      <img src={character.image} alt="" />
-      <p>information</p>
-      <TableContainer component={Paper} sx={{ maxHeight: "200px" }}>
-        <Table aria-label="simple table">
-          <TableBody>
-            <TableRow>
-              <TableCell>Estado</TableCell>
-              <TableCell align="right">{character.status}</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>Especie</TableCell>
-              <TableCell align="right">{character.species}</TableCell>
-            </TableRow>
-            {character.type !== "" && (
-              <TableRow>
-                <TableCell>Tipo</TableCell>
-                <TableCell align="right">{character.type}</TableCell>
-              </TableRow>
-            )}
-            <TableRow>
-              <TableCell>Sexo</TableCell>
-              <TableCell align="right">{character.gender}</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>Origen</TableCell>
-              <TableCell align="right">{character.origin.name}</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>Ubicacion</TableCell>
-              <TableCell align="right">{character.location.name}</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>Primera aparicion</TableCell>
-              <TableCell align="right">WIP</TableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <Button variant="contained" onClick={handleModal}>
+    <div className="modal-container">
+      <h2 className="modal-character-name">{character.name}</h2>
+      <img className="modal-image" src={character.image} alt="" />
+      <h3 className="modal-subtitle">information</h3>
+      <table className="modal-information">
+        <tbody>
+          <tr>
+            <th>Specie</th>
+            <td>{character.species}</td>
+          </tr>
+
+          <tr>
+            <th>Gender</th>
+            <td>{character.gender}</td>
+          </tr>
+
+          <tr>
+            <th>Status</th>
+            <td>{character.status}</td>
+          </tr>
+          <tr>
+            <th>Origin</th>
+            <td>{character.origin.name}</td>
+          </tr>
+          <tr>
+            <th>Location</th>
+            <td>{character.location.name}</td>
+          </tr>
+          <tr>
+            <th>Episodes</th>
+            <td className="episodes-container">
+              <ul className="episodes">
+                {filteredEpisodes &&
+                  filteredEpisodes.map((episode) => (
+                    <li key={episode!.id}>
+                      {`(${episode!.episode}) `}
+                      {episode!.name}
+                    </li>
+                  ))}
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <Button
+        className="modal-button"
+        sx={{ height: "3rem", width: "100%" }}
+        variant="contained"
+        onClick={handleModal}
+      >
         Cerrar ventana
       </Button>
     </div>
   );
 }
+
+/* {myArray.map((episode, index) => (
+  <td key={index}>{episode}</td>
+))} */

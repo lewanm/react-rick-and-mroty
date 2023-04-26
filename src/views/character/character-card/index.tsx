@@ -2,6 +2,7 @@ import React, { ReactElement, useState } from "react";
 import type { Character } from "../../../types/character";
 import CharacterModal from "./character-modal";
 import { Modal, Box } from "@mui/material";
+import { Episode } from "../../../types/episode";
 import "./styles.css";
 
 const style = {
@@ -9,7 +10,8 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 400,
+  minWidth: 400,
+  width: "60%",
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
@@ -18,11 +20,12 @@ const style = {
 
 type CharacterCardProps = {
   character: Character;
+  episodes: Episode[];
 };
 
 export default function CharacterCard(props: CharacterCardProps): ReactElement {
   const [openModal, setOpenModal] = useState(false);
-  const { character } = props;
+  const { character, episodes } = props;
 
   const handleModal = () => {
     setOpenModal(!openModal);
@@ -36,8 +39,12 @@ export default function CharacterCard(props: CharacterCardProps): ReactElement {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
-          <CharacterModal character={character} handleModal={handleModal} />
+        <Box className="box-modal" sx={style}>
+          <CharacterModal
+            episodes={episodes}
+            character={character}
+            handleModal={handleModal}
+          />
         </Box>
       </Modal>
 

@@ -1,0 +1,90 @@
+.modal-container {
+  display: flex;
+  flex-direction: column;
+  color: white;
+  font-family: "Roboto";
+  background-color: #414141;
+  padding: 1rem;
+  gap: 1rem;
+  max-height: 800px;
+}
+
+.modal-container .modal-image {
+  max-height: 350px;
+  object-fit: cover;
+  overflow: hidden;
+}
+
+table {
+  border: 1px solid white;
+  width: 100%;
+  overflow: auto;
+}
+
+table th,
+table td,
+table td ul li {
+  padding: 0.5rem;
+}
+
+table th {
+  text-align: left;
+  vertical-align: top;
+}
+
+table td {
+  text-align: right;
+  vertical-align: top;
+}
+
+.episodes {
+  max-height: 100px;
+  overflow: auto;
+}
+
+@media (min-width: 1000px) {
+  .modal-container {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    grid-template-rows: auto 3fr 2fr;
+    align-items: center;
+  }
+
+  .modal-character-name {
+    grid-column: 1/2;
+    grid-row: 1/2;
+  }
+
+  .modal-image {
+    grid-column: 1/2;
+    grid-row: 2/3;
+    width: 100%;
+    align-self: flex-start;
+  }
+
+  .modal-button {
+    grid-column: 1/2;
+    grid-row: 3/4;
+    align-self: flex-end;
+  }
+
+  .modal-subtitle {
+    grid-column: 2/3;
+    grid-row: 1/2;
+    text-align: right;
+  }
+  .modal-information {
+    grid-column: 2/3;
+    grid-row: 2/-1;
+    justify-self: self-end;
+
+    height: 100%;
+  }
+  .episodes-container {
+    height: auto;
+  }
+
+  .episodes {
+    max-height: 190px;
+  }
+}

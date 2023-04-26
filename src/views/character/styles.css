@@ -12,6 +12,10 @@
   display: flex;
   justify-content: center;
 }
+
+.return-container:hover {
+  cursor: pointer;
+}
 .return {
   font-family: var(--main-font);
   color: var(--main-text-color);
@@ -44,5 +48,6 @@
   display: grid;
   max-width: 1400px;
   gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(360px, 3fr));
+  margin-bottom: 2rem;
 }

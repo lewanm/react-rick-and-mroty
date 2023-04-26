@@ -1,7 +1,14 @@
-import React, { ReactElement, useState, useEffect, ChangeEvent } from "react";
+import React, {
+  ReactElement,
+  useState,
+  useEffect,
+  useLayoutEffect,
+  ChangeEvent,
+} from "react";
 import axios from "axios";
 import "./styles.css";
 import promiseHelper from "../../helpers/promise";
+import { fetching } from "../../helpers/fetching";
 import CharacterCard from "./character-card";
 import Filters from "./filters";
 import { theme } from "../../themes/MUI";
@@ -13,6 +20,7 @@ import {
   ThemeProvider,
 } from "@mui/material";
 import { Info, Character } from "../../types/character";
+import { Episode, Page } from "../../types/episode";
 
 //TODO CAMBIAR NOMRE A ESTA FUNCION QUE TRAIGO DE APP.TSX
 type Props = {
@@ -31,6 +39,7 @@ export default function Characters(props: Props): ReactElement {
     count: 0,
   });
   const [characters, setCharacters] = useState<Character[]>([]);
+  const [episodes, setEpisodes] = useState<Episode[]>([]);
   const [charFilter, setCharFilter] = useState<string>("");
   const [currentPage, setCurrentPage] = useState<number>(FIRST_PAGE);
   const [status, setStatus] = useState<string>("");
@@ -39,15 +48,16 @@ export default function Characters(props: Props): ReactElement {
 
   let api = `https://rickandmortyapi.com/api/character/?page=${currentPage}&name=${charFilter}&status=${status}&gender=${gender}&species=${species}`;
 
-  const getCharacters = async () => {
-    const [characters, error] = await promiseHelper(axios.get(api));
+  const getFetchedData = (api: string) => {
+    /*     const [characters, error] = await promiseHelper(axios.get(api));
     //TODO ver como corregir el tema del error al no encontrar algo por nombre.
     if (error) {
       console.log(error);
       return characters.data;
     }
 
-    return characters.data;
+    return characters.data; */
+    return fetching(api).then((data) => data);
   };
 
   const resetFilters = () => {
@@ -59,10 +69,29 @@ export default function Characters(props: Props): ReactElement {
   };
 
   const updateCharacters = () => {
-    getCharacters().then((characters) => {
+    getFetchedData(api).then((characters) => {
       setCharacters(characters.results);
       setInfo(characters.info);
     });
+  };
+
+  const getAllEpisodes = async () => {
+    const url = `https://rickandmortyapi.com/api/episode?page=`;
+
+    const firstPage = await getFetchedData(url + 1).catch((e) => {
+      throw new Error(e);
+    });
+
+    const { results, info } = firstPage;
+    setEpisodes((ep) => [...ep, ...results]);
+    const pagesPromise: Promise<Page>[] = [];
+
+    for (let i = 2; i <= info.pages; i++) {
+      pagesPromise.push(getFetchedData(url + i));
+    }
+
+    const pages = await Promise.all(pagesPromise); //todo catch err
+    pages.forEach((page) => setEpisodes((ep) => [...ep, ...page.results]));
   };
 
   const onCharacterFilter = (event: ChangeEvent<HTMLInputElement>) => {
@@ -81,8 +110,13 @@ export default function Characters(props: Props): ReactElement {
     updateCharacters();
   }, [charFilter, currentPage, status, gender, species]);
 
+  useEffect(() => {
+    getAllEpisodes();
+  }, []);
+
   return (
     <div className="general-container">
+      <button onClick={() => console.log(episodes)}>VER EPISODIOS</button>
       <div className="return-container">
         <span className="return" onClick={parentFunction}>
           Volver al menu anterior
@@ -128,12 +162,14 @@ export default function Characters(props: Props): ReactElement {
 
         <div className="cards-container">
           {characters.map((character) => (
-            <CharacterCard character={character} key={character.id} />
+            <CharacterCard
+              episodes={episodes}
+              character={character}
+              key={character.id}
+            />
           ))}
         </div>
       </ThemeProvider>
-
-      <span onClick={parentFunction}>Volver al menu anterior</span>
     </div>
   );
 }
