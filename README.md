@@ -1,23 +1,21 @@
-# react-rick-and-mroty
-Aplicacion sencilla de uso de API con axios, React y ReacrMUI
-No esta finalizada la parte visual, pero la parte funcional (aunque me encantaria poder modificar muchas cosas como se hacen) ya quedaria por terminado una version 1.0
-En este proyecto utilizo Vite(React + TypeScript)
+Realice una aplicacion de Rick and Morty, donde se podrá explorar la API de Rick and Morty para encontrar información sobre todos los personajes de la serie. Además, tiene filtros para buscar personajes según su estado, género y especie, así como también navegar a través de un paginado para encontrar fácilmente y un campo de busqueda.
 
-Cosas que se implementan:
+Adicionalmente en cada personaje se puede clickear sobre el nombre para abrir una ventana modal con más información y un listado de todos los episodios en los que aparece. 
 
--TyScript
--Uso de API con Axios en src/views/character/index.tsx y manejos de promesas.
--React Hooks (useState, useEffect)
--ReactMUI (ThemeProvider, Button, Pagination, TextField, Select, Modal, Box, Table, etc
+Use las tecnologías: 
+React para la interfaz de usuario, 
+axios para realizar llamadas a la API, 
+Typescript para una mejor experiencia de desarrollo y comenzar a aprender a usarlo.
+Vite para la construcción
 
-Preview con fallos de CSS
-https://cool-fudge-7e244d.netlify.app/
+Se puede ver en netlify en el siguiente <b><a href="https://cool-fudge-7e244d.netlify.app/" target="_blank">enlace</a></b>
+
 <br>
-<img src="https://github.com/lewanm/react-rick-and-mroty/blob/main/character.PNG?raw=true">
+<p align="center"> <img align="center" src="https://github.com/lewanm/react-rick-and-mroty/blob/main/character.PNG?raw=true"> </p>
 
 Sobre mi:
-<h1 align="center">Mi nombre es Nahuel Montero</h1>
-<h3 align="center">Desarrollador Frontend</h3>
+<h1 align="center">Nahuel Montero</h1>
+<h3 align="center">Desarrollador</h3>
 
 - Estoy aprendiendo **React y TypeScript**
 
