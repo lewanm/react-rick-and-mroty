@@ -116,7 +116,6 @@ export default function Characters(props: Props): ReactElement {
 
   return (
     <div className="general-container">
-      <button onClick={() => console.log(episodes)}>VER EPISODIOS</button>
       <div className="return-container">
         <span className="return" onClick={parentFunction}>
           Volver al menu anterior
